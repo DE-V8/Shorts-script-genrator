@@ -1,0 +1,19 @@
+.options button {
+  margin: 5px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #ddd;
+}
+.options button:hover {
+  background: #bbb;
+}
+textarea {
+  width: 90%;
+  height: 80px;
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viral Script Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      color: #dddddd;
+    }
+    .container {
+      background: #353535;
+      padding: 20px;
+      border-radius: 12px;
+      width: 400px;
+      box-shadow: 0 0 15px rgba(0,255,200,0.4);
+    }
+    label {
+      font-size: 14px;
+      display: block;
+      margin-top: 10px;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      margin-top: 5px;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      font-size: 14px;
+    }
+    button {
+      margin-top: 15px;
+      background: #00ffcc;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #00ccaa;
+    }
+    pre {
+      background: #000;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎬 Viral Script Generator</h1>
+  <div class="container">
+    <label>🔗 Article URL:</label>
+    <input type="text" id="url" placeholder="Paste article link...">
+
+    <label>🎭 Emotion:</label>
+    <select id="emotion">
+      <option value="Excited">Excited</option>
+      <option value="Funny">Funny</option>
+      <option value="Serious">Serious</option>
+      <option value="Inspirational">Inspirational</option>
+    </select>
+
+    <label>🌍 Language:</label>
+    <select id="language">
+      <option value="English">English</option>
+      <option value="Hindi">Hindi</option>
+      <option value="Bengali">Bengali</option>
+      <option value="Marathi">Marathi</option>
+      <option value="Tamil">Tamil</option>
+      <option value="Telugu">Telugu</option>
+      <option value="Gujarati">Gujarati</option>
+      <option value="Kannada">Kannada</option>
+      <option value="Malayalam">Malayalam</option>
+      <option value="Punjabi">Punjabi</option>
+      <option value="Odia">Odia</option>
+      <option value="Assamese">Assamese</option>
+      <option value="Nepali">Nepali</option>
+      <option value="Urdu">Urdu</option>
+      <option value="Konkani">Konkani</option>
+      <option value="Marwari">Marwari</option>
+      <option value="Sanskrit">Sanskrit</option>
+    </select>
+
+    <label>⚡ Stance:</label>
+    <select id="stance">
+      <option value="Support">Support</option>
+      <option value="Against">Against</option>
+      <option value="Rebel">Rebel</option>
+    </select>
+
+    <label>⏲️ Duration:</label>
+    <select id="duration">
+      <option value="15">15 sec</option>
+      <option value="30">30 sec</option>
+      <option value="60">60 sec</option>
+    </select>
+
+    <label>📝 Extra Info (optional):</label>
+    <textarea id="extraInfo" placeholder="Add extra instructions..."></textarea>
+
+    <button onclick="generateScript()">🚀 Generate Script</button>
+
+    <pre id="output"></pre>
+  </div>
+
+  <script>
+    async function generateScript() {
+      const url = document.getElementById("url").value;
+      const emotion = document.getElementById("emotion").value;
+      const language = document.getElementById("language").value;
+      const stance = document.getElementById("stance").value;
+      const duration = document.getElementById("duration").value;
+      const extraInfo = document.getElementById("extraInfo").value;
+
+      document.getElementById("output").innerText = "⏳ Generating script...";
+
+      try {
+        const response = await fetch("http://localhost:5000/generate-script", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url, emotion, language, stance, duration, extraInfo })
+        });
+
+        const data = await response.json();
+        document.getElementById("output").innerText = data.script || "⚠️ No script generated.";
+      } catch (err) {
+        document.getElementById("output").innerText = "❌ Error: " + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
